@@ -1,88 +1,769 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Emre Serhat Akkas</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emre Serhat Akkas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9f9f9;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .lang-btn {
+            padding: 8px 12px;
+            border: none;
+            background: transparent;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background: #0077cc;
+            color: white;
+        }
+
+        .lang-btn:hover:not(.active) {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 40px 20px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            display: block;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .tabs-nav {
+            display: flex;
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 20px 25px;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            min-width: 120px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tab-button:hover {
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .tab-button.active {
+            color: #0077cc;
+            background: #f8f9ff;
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #0077cc;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 40px;
+            animation: fadeInUp 0.4s ease;
+            min-height: 500px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section h2 {
+            color: #333;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .section h3 {
+            color: #0077cc;
+            margin-bottom: 10px;
+            margin-top: 25px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .section p {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .section li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .section li::before {
+            content: '▸';
+            color: #0077cc;
+            position: absolute;
+            left: 0;
+            top: 8px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .skill-category {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #0077cc;
+        }
+
+        .skill-category h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .contact-info a {
+            color: #0077cc;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            margin: 5px;
+            display: inline-block;
+            border-radius: 25px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,119,204,0.3);
+        }
+
+        .experience-item, .education-item {
+            background: #f8f9fa;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border-left: 4px solid #0077cc;
+        }
+
+        .experience-item h3, .education-item h3 {
+            margin-top: 0;
+        }
+
+        .volunteer-item {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .volunteer-item h3 {
+            margin-top: 0;
+            color: #1976d2;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .about-intro {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                margin-top: 80px;
+            }
+            
+            .tabs-nav {
+                flex-direction: column;
+            }
+            
+            .tab-button {
+                min-width: auto;
+            }
+            
+            .tab-content {
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 30px 20px 15px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        .language-content {
+            display: none;
+        }
+
+        .language-content.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <img src="profile.jpg" alt="Profil Fotoğrafı" class="profile-pic" />
-      <h1>Emre Serhat Akkas</h1>
-      <p>Data Scientist · Python | SQL | Machine Learning</p>
-    </header>
+    <div class="language-switcher">
+        <button class="lang-btn active" onclick="switchLanguage('tr')">TR</button>
+        <button class="lang-btn" onclick="switchLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="switchLanguage('de')">DE</button>
+    </div>
 
-    <section class="about">
-      <h2>About Me</h2>
-      <p>I'm a Data Science (B.Sc.) student, interested on Data Analytics, Statistics, Financial Mathematics and Actuarial Sciences. I am a passionate researcher and practitioner in the field of Statistics and Data Science. I develop data analysis, visualization and machine learning projects with Python and SQL.</p>
-      <p>For detailed information and contact, you can reach my linkedin account from the link below.</p>
-    </section>
+    <div class="container">
+        <div class="header">
+            <img src="profile.jpg" alt="Profile Picture" class="profile-pic" />
+            <div class="language-content active" data-lang="tr">
+                <h1>Emre Serhat Akkas</h1>
+                <p class="subtitle">Veri Bilimci · Python | SQL | Makine Öğrenmesi</p>
+            </div>
+            <div class="language-content" data-lang="en">
+                <h1>Emre Serhat Akkas</h1>
+                <p class="subtitle">Data Scientist · Python | SQL | Machine Learning</p>
+            </div>
+            <div class="language-content" data-lang="de">
+                <h1>Emre Serhat Akkas</h1>
+                <p class="subtitle">Data Scientist · Python | SQL | Maschinelles Lernen</p>
+            </div>
+        </div>
 
-    <section class="experience">
-      <h2>Work Experince</h2>
-      <h3>Project Assistance & Statistical Analysis Intern - BYS Group (2024)</h3>
-      <p>• Project Management and Statistical Analysis for G-CAT and IQJVC projects</p>
-      <p>• Handled Topics: Data Cleaning, Data Manipulation, Data Visualization, Statistics, Exploratory Data Analysis, Project Operations, Software Testing</p>
-      <p>• Used Tools: R, R Studio, MS Excel, MS Word</p>
-      <h3>Data Analyst Intern – Jotform Yazılım A.Ş. (2022)</h3>
-      <p>• Customer Segmentation with RFM Analysis</p>
-      <p>• Handled Topics : Data Cleaning, Manipulation, Visualization, Statistics, Exploratory Data Analysis</p>
-      <p>• Used Tools : Python, Pandas, Numpy, Scipy.Stats, Statsmodel, Matplotlib, Seaborn, Plotly</p>
-    </section>
+        <div class="tabs-nav">
+            <button class="tab-button active" onclick="showTab('about')">
+                <span class="language-content active" data-lang="tr">Hakkımda</span>
+                <span class="language-content" data-lang="en">About Me</span>
+                <span class="language-content" data-lang="de">Über mich</span>
+            </button>
+            <button class="tab-button" onclick="showTab('experience')">
+                <span class="language-content active" data-lang="tr">Deneyim</span>
+                <span class="language-content" data-lang="en">Experience</span>
+                <span class="language-content" data-lang="de">Berufserfahrung</span>
+            </button>
+            <button class="tab-button" onclick="showTab('education')">
+                <span class="language-content active" data-lang="tr">Eğitim</span>
+                <span class="language-content" data-lang="en">Education</span>
+                <span class="language-content" data-lang="de">Bildung</span>
+            </button>
+            <button class="tab-button" onclick="showTab('volunteer')">
+                <span class="language-content active" data-lang="tr">Gönüllülük</span>
+                <span class="language-content" data-lang="en">Volunteer</span>
+                <span class="language-content" data-lang="de">Freiwilligen Arbeit</span>
+            </button>
+            <button class="tab-button" onclick="showTab('skills')">
+                <span class="language-content active" data-lang="tr">Yetenekler</span>
+                <span class="language-content" data-lang="en">Skills</span>
+                <span class="language-content" data-lang="de">Fähigkeiten</span>
+            </button>
+            <button class="tab-button" onclick="showTab('contact')">
+                <span class="language-content active" data-lang="tr">İletişim</span>
+                <span class="language-content" data-lang="en">Contact</span>
+                <span class="language-content" data-lang="de">Kontakt</span>
+            </button>
+        </div>
 
-    <section class="education">
-      <h2>Education</h2>
-      <h3>Statistics (B.Sc) Student - Hacettepe University, Ankara/Turkey (2021-2024)</h3>
-      <p>Studies discontinued after completion of 150 ECTS credits (transferred to Philipps-Universität Marburg).</p>
-      <h3>Data Science (B.Sc) Student – Philipps-Universität Marburg (2024 - 2026)</h3>
-      <p>I transferred my undergraduate studies from Hacettepe University (Ankara, Turkey) to the Department of Data Science at Philipps-Universität Marburg.</p>
-    </section>
-    
-    <section class="volunteer">
-      <h2>Volunteer Work</h2>
-      <h3>Hacettepe University Statistics & Data Science Society</h3>
-      <p>•Preisdent (2023-2024)</p>
-      <p>•Vice Preisdent (2022-2023)</p>
-      <p>•Executive Board Member (2021-2022)</p>
-      <h3>Global AI Hub</h3>
-      <p>•Core Member (2021-2024)</p>
-      <p>•Mentor at Python Bootcamp (2022-2022)</p>
-    </section>
-    
-    <section class="skills">
-      <h2>Technical Skills</h2>
-      <ul>
-        <li>Python, Pandas, NumPy, Matplotlib</li>
-        <li>SQL, PostgreSQL, MySQL</li>
-        <li>Scikit-learn, Machine Learning</li>
-        <li>Excel, Tableau</li>
-      </ul>
-      <h2>Soft Skills</h2>
-      <ul>
-        <li>Crisis Managemant, Analytical Thinking, Corporate Communication</li>
-      </ul>
-      <h2>Languages</h2>
-      <ul>
-        <li>Turkish (Mother Tongue), German (Native), English (Fluent)</li>
-      </ul>
-    </section>
+        <!-- ABOUT TAB -->
+        <div id="about" class="tab-content active">
+            <div class="section">
+                <div class="language-content active" data-lang="tr">
+                    <div class="about-intro">
+                        <h2>Hakkımda</h2>
+                        <p>Veri Bilimi (Lisans) öğrencisiyim ve Veri Analitiği, İstatistik, Finansal Matematik ve Aktüerya Bilimleri alanlarıyla ilgileniyorum. İstatistik ve Veri Bilimi alanında tutkulu bir araştırmacı ve uygulayıcıyım. Python ve SQL ile veri analizi, görselleştirme ve makine öğrenmesi projeleri geliştiriyorum.</p>
+                        <p>Detaylı bilgi ve iletişim için İletişim kısmında bulunan LinkedIn hesabımdan ulaşabilirsiniz.</p>
+                    </div>
+                </div>
+                <div class="language-content" data-lang="en">
+                    <div class="about-intro">
+                        <h2>About Me</h2>
+                        <p>I'm a Data Science (B.Sc.) student, interested in Data Analytics, Statistics, Financial Mathematics and Actuarial Sciences. I am a passionate researcher and practitioner in the field of Statistics and Data Science. I develop data analysis, visualization and machine learning projects with Python and SQL.</p>
+                        <p>For detailed information and contact, you can reach my LinkedIn account from my LinkedIn account in the contact section.</p>
+                    </div>
+                </div>
+                <div class="language-content" data-lang="de">
+                    <div class="about-intro">
+                        <h2>Über mich</h2>
+                        <p>Ich bin Student der Data Science (B.Sc.) und interessiere mich für Datenanalytik, Statistik, Finanzmathematik und Versicherungsmathematik. Ich bin ein leidenschaftlicher Forscher und Praktiker im Bereich Statistik und Datenwissenschaft. Ich entwickle Datenanalyse-, Visualisierungs- und Machine-Learning-Projekte mit Python und SQL.</p>
+                        <p>Für detaillierte Informationen und Kontakt können Sie mein LinkedIn-Konto im Kontaktbereich erreichen.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <section class="contact">
-      <h2>Contact</h2>
-      <p><strong>E-posta:</strong> <a href="mailto:emre@akkas.eu">emre@akkas.eu</a></p>
-      <p>
-        <a href="https://www.linkedin.com/in/emreserhatakkas/" target="_blank">LinkedIn</a> ·
-        <a href="https://github.com/emresakkas" target="_blank">GitHub</a>
-      </p>
-    </section>
+        <!-- EXPERIENCE TAB -->
+        <div id="experience" class="tab-content">
+            <div class="section">
+                <div class="language-content active" data-lang="tr">
+                    <h2>İş Deneyimi</h2>
+                    <div class="experience-item">
+                        <h3>Proje Asistanı & İstatistiksel Analiz Stajyeri - BYS Group (2024)</h3>
+                        <p>• G-CAT ve IQJVC projeleri için Proje Yönetimi ve İstatistiksel Analiz</p>
+                        <p>• İşlenen Konular: Veri Temizleme, Veri Manipülasyonu, Veri Görselleştirme, İstatistik, Keşifsel Veri Analizi, Proje Operasyonları, Yazılım Testi</p>
+                        <p>• Kullanılan Araçlar: R, R Studio, MS Excel, MS Word</p>
+                    </div>
+                    <div class="experience-item">
+                        <h3>Veri Analisti Stajyeri – Jotform Yazılım A.Ş. (2022)</h3>
+                        <p>• RFM Analizi ile Müşteri Segmentasyonu</p>
+                        <p>• İşlenen Konular: Veri Temizleme, Manipülasyon, Görselleştirme, İstatistik, Keşifsel Veri Analizi</p>
+                        <p>• Kullanılan Araçlar: Python, Pandas, Numpy, Scipy.Stats, Statsmodel, Matplotlib, Seaborn, Plotly</p>
+                    </div>
+                </div>
+                <div class="language-content" data-lang="en">
+                    <h2>Work Experience</h2>
+                    <div class="experience-item">
+                        <h3>Project Assistance & Statistical Analysis Intern - BYS Group (2024)</h3>
+                        <p>• Project Management and Statistical Analysis for G-CAT and IQJVC projects</p>
+                        <p>• Handled Topics: Data Cleaning, Data Manipulation, Data Visualization, Statistics, Exploratory Data Analysis, Project Operations, Software Testing</p>
+                        <p>• Used Tools: R, R Studio, MS Excel, MS Word</p>
+                    </div>
+                    <div class="experience-item">
+                        <h3>Data Analyst Intern – Jotform Yazılım A.Ş. (2022)</h3>
+                        <p>• Customer Segmentation with RFM Analysis</p>
+                        <p>• Handled Topics: Data Cleaning, Manipulation, Visualization, Statistics, Exploratory Data Analysis</p>
+                        <p>• Used Tools: Python, Pandas, Numpy, Scipy.Stats, Statsmodel, Matplotlib, Seaborn, Plotly</p>
+                    </div>
+                </div>
+                <div class="language-content" data-lang="de">
+                    <h2>Berufserfahrung</h2>
+                    <div class="experience-item">
+                        <h3>Projektassistenz & Statistische Analyse Praktikant - BYS Group (2024)</h3>
+                        <p>• Projektmanagement und Statistische Analyse für G-CAT und IQJVC Projekte</p>
+                        <p>• Behandelte Themen: Datenbereinigung, Datenmanipulation, Datenvisualisierung, Statistik, Explorative Datenanalyse, Projektoperationen, Softwaretest</p>
+                        <p>• Verwendete Tools: R, R Studio, MS Excel, MS Word</p>
+                    </div>
+                    <div class="experience-item">
+                        <h3>Datenanalyst Praktikant – Jotform Yazılım A.Ş. (2022)</h3>
+                        <p>• Kundensegmentierung mit RFM-Analyse</p>
+                        <p>• Behandelte Themen: Datenbereinigung, Manipulation, Visualisierung, Statistik, Explorative Datenanalyse</p>
+                        <p>• Verwendete Tools: Python, Pandas, Numpy, Scipy.Stats, Statsmodel, Matplotlib, Seaborn, Plotly</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <footer>
-      <p>&copy; 2025 Emre Serhat Akkas</p>
-    </footer>
-  </div>
+        <!-- EDUCATION TAB -->
+        <div id="education" class="tab-content">
+            <div class="section">
+                <div class="language-content active" data-lang="tr">
+                    <h2>Eğitim</h2>
+                    <div class="education-item">
+                        <h3>İstatistik (Lisans) Öğrencisi - Hacettepe Üniversitesi, Ankara/Türkiye (2021-2024)</h3>
+                        <p>150 ECTS kredisinin tamamlanmasından sonra eğitime ara verildi (Philipps-Universität Marburg'a transfer edildi).</p>
+                    </div>
+                    <div class="education-item">
+                        <h3>Veri Bilimi (Lisans) Öğrencisi – Philipps-Universität Marburg (2024 - 2026)</h3>
+                        <p>Lisans eğitimimi Hacettepe Üniversitesi'nden (Ankara, Türkiye) Philipps-Universität Marburg Veri Bilimi Bölümü'ne transfer ettim.</p>
+                    </div>
+                </div>
+                <div class="language-content" data-lang="en">
+                    <h2>Education</h2>
+                    <div class="education-item">
+                        <h3>Statistics (B.Sc) Student - Hacettepe University, Ankara/Turkey (2021-2024)</h3>
+                        <p>Studies discontinued after completion of 150 ECTS credits (transferred to Philipps-Universität Marburg).</p>
+                    </div>
+                    <div class="education-item">
+                        <h3>Data Science (B.Sc) Student – Philipps-Universität Marburg (2024 - 2026)</h3>
+                        <p>I transferred my undergraduate studies from Hacettepe University (Ankara, Turkey) to the Department of Data Science at Philipps-Universität Marburg.</p>
+                    </div>
+                </div>
+                <div class="language-content" data-lang="de">
+                    <h2>Bildung</h2>
+                    <div class="education-item">
+                        <h3>Statistik (B.Sc) Student - Hacettepe Universität, Ankara/Türkei (2021-2024)</h3>
+                        <p>Studium nach Abschluss von 150 ECTS-Punkten eingestellt (Transfer an die Philipps-Universität Marburg).</p>
+                    </div>
+                    <div class="education-item">
+                        <h3>Data Science (B.Sc) Student – Philipps-Universität Marburg (2024 - 2026)</h3>
+                        <p>Ich habe mein Bachelorstudium von der Hacettepe Universität (Ankara, Türkei) an den Fachbereich Data Science der Philipps-Universität Marburg überwiesen.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VOLUNTEER TAB -->
+        <div id="volunteer" class="tab-content">
+            <div class="section">
+                <div class="language-content active" data-lang="tr">
+                    <h2>Gönüllü Çalışmalar</h2>
+                    <div class="volunteer-item">
+                        <h3>Hacettepe Üniversitesi İstatistik & Veri Bilimi Topluluğu</h3>
+                        <p>• Başkan (2023-2024)</p>
+                        <p>• Başkan Yardımcısı (2022-2023)</p>
+                        <p>• Yönetim Kurulu Üyesi (2021-2022)</p>
+                    </div>
+                    <div class="volunteer-item">
+                        <h3>Global AI Hub</h3>
+                        <p>• Core Member (2021-2024)</p>
+                        <p>• Python Bootcamp Mentoru (2022-2022)</p>
+                    </div>
+                </div>
+                <div class="language-content" data-lang="en">
+                    <h2>Volunteer Work</h2>
+                    <div class="volunteer-item">
+                        <h3>Hacettepe University Statistics & Data Science Society</h3>
+                        <p>• President (2023-2024)</p>
+                        <p>• Vice President (2022-2023)</p>
+                        <p>• Executive Board Member (2021-2022)</p>
+                    </div>
+                    <div class="volunteer-item">
+                        <h3>Global AI Hub</h3>
+                        <p>• Core Member (2021-2024)</p>
+                        <p>• Mentor at Python Bootcamp (2022-2022)</p>
+                    </div>
+                </div>
+                <div class="language-content" data-lang="de">
+                    <h2>Freiwilligen Arbeit</h2>
+                    <div class="volunteer-item">
+                        <h3>Hacettepe Universität Statistik & Data Science Gesellschaft</h3>
+                        <p>• Präsident (2023-2024)</p>
+                        <p>• Vizepräsident (2022-2023)</p>
+                        <p>• Vorstandsmitglied (2021-2022)</p>
+                    </div>
+                    <div class="volunteer-item">
+                        <h3>Global AI Hub</h3>
+                        <p>• Core Member (2021-2024)</p>
+                        <p>• Mentor bei Python Bootcamp (2022-2022)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SKILLS TAB -->
+        <div id="skills" class="tab-content">
+            <div class="section">
+                <div class="language-content active" data-lang="tr">
+                    <h2>Yeteneklerim</h2>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3>Teknik Yetenekler</h3>
+                            <ul>
+                                <li>Python, Pandas, NumPy, Matplotlib</li>
+                                <li>SQL, PostgreSQL, MySQL</li>
+                                <li>Scikit-learn, Makine Öğrenmesi</li>
+                                <li>Excel, Tableau</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Yumuşak Yetenekler</h3>
+                            <ul>
+                                <li>Kriz Yönetimi</li>
+                                <li>Analitik Düşünme</li>
+                                <li>Kurumsal İletişim</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Diller</h3>
+                            <ul>
+                                <li>Türkçe (Ana Dil)</li>
+                                <li>Almanca (Uzmanlık Derecesi (CEFR - C1))</li>
+                                <li>İngilizce (Akıcı)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="language-content" data-lang="en">
+                    <h2>Skills</h2>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3>Technical Skills</h3>
+                            <ul>
+                                <li>Python, Pandas, NumPy, Matplotlib</li>
+                                <li>SQL, PostgreSQL, MySQL</li>
+                                <li>Scikit-learn, Machine Learning</li>
+                                <li>Excel, Tableau</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Soft Skills</h3>
+                            <ul>
+                                <li>Crisis Management</li>
+                                <li>Analytical Thinking</li>
+                                <li>Corporate Communication</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Languages</h3>
+                            <ul>
+                                <li>Turkish (Mother Tongue)</li>
+                                <li>German (Native)</li>
+                                <li>English (Fluent)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="language-content" data-lang="de">
+                    <h2>Fähigkeiten</h2>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3>Technische Fähigkeiten</h3>
+                            <ul>
+                                <li>Python, Pandas, NumPy, Matplotlib</li>
+                                <li>SQL, PostgreSQL, MySQL</li>
+                                <li>Scikit-learn, Maschinelles Lernen</li>
+                                <li>Excel, Tableau</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Soft Skills</h3>
+                            <ul>
+                                <li>Krisenmanagement</li>
+                                <li>Analytisches Denken</li>
+                                <li>Unternehmenskommunikation</li>
+                            </ul>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Sprachen</h3>
+                            <ul>
+                                <li>Türkisch (Muttersprache)</li>
+                                <li>Deutsch (Verhandlungssicher (CEFR Niveau - C1))</li>
+                                <li>Englisch (Fließend)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT TAB -->
+        <div id="contact" class="tab-content">
+            <div class="section">
+                <div class="language-content active" data-lang="tr">
+                    <h2>İletişim</h2>
+                    <div class="contact-info">
+                        <p><strong>E-posta:</strong> <a href="mailto:emre@akkas.eu">emre@akkas.eu</a></p>
+                        <div style="margin-top: 20px;">
+                            <a href="https://www.linkedin.com/in/emreserhatakkas/" target="_blank">LinkedIn</a>
+                            <a href="https://github.com/emresakkas" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="language-content" data-lang="en">
+                    <h2>Contact</h2>
+                    <div class="contact-info">
+                        <p><strong>E-mail:</strong> <a href="mailto:emre@akkas.eu">emre@akkas.eu</a></p>
+                        <div style="margin-top: 20px;">
+                            <a href="https://www.linkedin.com/in/emreserhatakkas/" target="_blank">LinkedIn</a>
+                            <a href="https://github.com/emresakkas" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="language-content" data-lang="de">
+                    <h2>Kontakt</h2>
+                    <div class="contact-info">
+                        <p><strong>E-Mail:</strong> <a href="mailto:emre@akkas.eu">emre@akkas.eu</a></p>
+                        <div style="margin-top: 20px;">
+                            <a href="https://www.linkedin.com/in/emreserhatakkas/" target="_blank">LinkedIn</a>
+                            <a href="https://github.com/emresakkas" target="_blank">GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="language-content active" data-lang="tr">
+                <p>&copy; 2025 Emre Serhat Akkas</p>
+            </div>
+            <div class="language-content" data-lang="en">
+                <p>&copy; 2025 Emre Serhat Akkas</p>
+            </div>
+            <div class="language-content" data-lang="de">
+                <p>&copy; 2025 Emre Serhat Akkas</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentLanguage = 'tr';
+        let currentTab = 'about';
+
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Hide all language content
+            document.querySelectorAll('.language-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show content for selected language
+            document.querySelectorAll(`[data-lang="${lang}"]`).forEach(content => {
+                content.classList.add('active');
+            });
+        }
+
+        function showTab(tabName) {
+            currentTab = tabName;
+            
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tab buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.altKey) {
+                const tabs = ['about', 'experience', 'education', 'volunteer', 'skills', 'contact'];
+                const currentIndex = tabs.indexOf(currentTab);
+                
+                if (e.key === 'ArrowRight' && currentIndex < tabs.length - 1) {
+                    e.preventDefault();
+                    document.querySelectorAll('.tab-button')[currentIndex + 1].click();
+                } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                    e.preventDefault();
+                    document.querySelectorAll('.tab-button')[currentIndex - 1].click();
+                }
+            }
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial active states
+            switchLanguage('tr');
+            showTab('about');
+        });
+    </script>
 </body>
 </html>
