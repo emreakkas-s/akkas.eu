@@ -258,16 +258,16 @@
         }
 
         .volunteer-item {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e3f2fd 100%);
+            background: #f8f9fa;
             padding: 25px;
             margin-bottom: 20px;
             border-radius: 15px;
-            border-left: 4px solid #2196f3;
+            border-left: 4px solid #0077cc;
         }
 
         .volunteer-item h3 {
             margin-top: 0;
-            color: #1976d2;
+            color: #0077cc;
         }
 
         .footer {
@@ -329,23 +329,84 @@
         .language-content.active {
             display: block;
         }
+
+        .contact-form {
+            margin-top: 40px;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 4px solid #0077cc;
+        }
+
+        .contact-form h3 {
+            margin-bottom: 20px;
+            color: #0077cc;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0077cc;
+            box-shadow: 0 0 0 2px rgba(0,119,204,0.1);
+        }
+
+        .submit-btn {
+            background: #0077cc;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #005fa3;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
     <div class="language-switcher">
-        <button class="lang-btn active" onclick="switchLanguage('tr')">TR</button>
-        <button class="lang-btn" onclick="switchLanguage('en')">EN</button>
-        <button class="lang-btn" onclick="switchLanguage('de')">DE</button>
+        <button class="lang-btn active" onclick="switchLanguage('en')">🇬🇧 EN</button>
+        <button class="lang-btn" onclick="switchLanguage('de')">🇩🇪 DE</button>
+        <button class="lang-btn" onclick="switchLanguage('tr')">🇹🇷 TR</button>
     </div>
 
     <div class="container">
         <div class="header">
             <img src="profile.jpg" alt="Profile Picture" class="profile-pic" />
-            <div class="language-content active" data-lang="tr">
+            <div class="language-content" data-lang="tr">
                 <h1>Emre Serhat Akkas</h1>
                 <p class="subtitle">Veri Bilimci · Python | SQL | Makine Öğrenmesi</p>
             </div>
-            <div class="language-content" data-lang="en">
+            <div class="language-content active" data-lang="en">
                 <h1>Emre Serhat Akkas</h1>
                 <p class="subtitle">Data Scientist · Python | SQL | Machine Learning</p>
             </div>
@@ -357,33 +418,33 @@
 
         <div class="tabs-nav">
             <button class="tab-button active" onclick="showTab('about')">
-                <span class="language-content active" data-lang="tr">Hakkımda</span>
-                <span class="language-content" data-lang="en">About Me</span>
+                <span class="language-content" data-lang="tr">Hakkımda</span>
+                <span class="language-content active" data-lang="en">About Me</span>
                 <span class="language-content" data-lang="de">Über mich</span>
             </button>
             <button class="tab-button" onclick="showTab('experience')">
-                <span class="language-content active" data-lang="tr">Deneyim</span>
-                <span class="language-content" data-lang="en">Experience</span>
+                <span class="language-content" data-lang="tr">Deneyim</span>
+                <span class="language-content active" data-lang="en">Experience</span>
                 <span class="language-content" data-lang="de">Berufserfahrung</span>
             </button>
             <button class="tab-button" onclick="showTab('education')">
-                <span class="language-content active" data-lang="tr">Eğitim</span>
-                <span class="language-content" data-lang="en">Education</span>
+                <span class="language-content" data-lang="tr">Eğitim</span>
+                <span class="language-content active" data-lang="en">Education</span>
                 <span class="language-content" data-lang="de">Bildung</span>
             </button>
             <button class="tab-button" onclick="showTab('volunteer')">
-                <span class="language-content active" data-lang="tr">Gönüllülük</span>
-                <span class="language-content" data-lang="en">Volunteer</span>
+                <span class="language-content" data-lang="tr">Gönüllülük</span>
+                <span class="language-content active" data-lang="en">Volunteer</span>
                 <span class="language-content" data-lang="de">Freiwilligen Arbeit</span>
             </button>
             <button class="tab-button" onclick="showTab('skills')">
-                <span class="language-content active" data-lang="tr">Yetenekler</span>
-                <span class="language-content" data-lang="en">Skills</span>
+                <span class="language-content" data-lang="tr">Yetenekler</span>
+                <span class="language-content active" data-lang="en">Skills</span>
                 <span class="language-content" data-lang="de">Fähigkeiten</span>
             </button>
             <button class="tab-button" onclick="showTab('contact')">
-                <span class="language-content active" data-lang="tr">İletişim</span>
-                <span class="language-content" data-lang="en">Contact</span>
+                <span class="language-content" data-lang="tr">İletişim</span>
+                <span class="language-content active" data-lang="en">Contact</span>
                 <span class="language-content" data-lang="de">Kontakt</span>
             </button>
         </div>
@@ -391,14 +452,14 @@
         <!-- ABOUT TAB -->
         <div id="about" class="tab-content active">
             <div class="section">
-                <div class="language-content active" data-lang="tr">
+                <div class="language-content" data-lang="tr">
                     <div class="about-intro">
                         <h2>Hakkımda</h2>
                         <p>Veri Bilimi (Lisans) öğrencisiyim ve Veri Analitiği, İstatistik, Finansal Matematik ve Aktüerya Bilimleri alanlarıyla ilgileniyorum. İstatistik ve Veri Bilimi alanında tutkulu bir araştırmacı ve uygulayıcıyım. Python ve SQL ile veri analizi, görselleştirme ve makine öğrenmesi projeleri geliştiriyorum.</p>
                         <p>Detaylı bilgi ve iletişim için İletişim kısmında bulunan LinkedIn hesabımdan ulaşabilirsiniz.</p>
                     </div>
                 </div>
-                <div class="language-content" data-lang="en">
+                <div class="language-content active" data-lang="en">
                     <div class="about-intro">
                         <h2>About Me</h2>
                         <p>I'm a Data Science (B.Sc.) student, interested in Data Analytics, Statistics, Financial Mathematics and Actuarial Sciences. I am a passionate researcher and practitioner in the field of Statistics and Data Science. I develop data analysis, visualization and machine learning projects with Python and SQL.</p>
@@ -418,7 +479,7 @@
         <!-- EXPERIENCE TAB -->
         <div id="experience" class="tab-content">
             <div class="section">
-                <div class="language-content active" data-lang="tr">
+                <div class="language-content" data-lang="tr">
                     <h2>İş Deneyimi</h2>
                     <div class="experience-item">
                         <h3>Proje Asistanı & İstatistiksel Analiz Stajyeri - BYS Group (2024)</h3>
@@ -433,7 +494,7 @@
                         <p>• Kullanılan Araçlar: Python, Pandas, Numpy, Scipy.Stats, Statsmodel, Matplotlib, Seaborn, Plotly</p>
                     </div>
                 </div>
-                <div class="language-content" data-lang="en">
+                <div class="language-content active" data-lang="en">
                     <h2>Work Experience</h2>
                     <div class="experience-item">
                         <h3>Project Assistance & Statistical Analysis Intern - BYS Group (2024)</h3>
@@ -469,7 +530,7 @@
         <!-- EDUCATION TAB -->
         <div id="education" class="tab-content">
             <div class="section">
-                <div class="language-content active" data-lang="tr">
+                <div class="language-content" data-lang="tr">
                     <h2>Eğitim</h2>
                     <div class="education-item">
                         <h3>İstatistik (Lisans) Öğrencisi - Hacettepe Üniversitesi, Ankara/Türkiye (2021-2024)</h3>
@@ -480,7 +541,7 @@
                         <p>Lisans eğitimimi Hacettepe Üniversitesi'nden (Ankara, Türkiye) Philipps-Universität Marburg Veri Bilimi Bölümü'ne transfer ettim.</p>
                     </div>
                 </div>
-                <div class="language-content" data-lang="en">
+                <div class="language-content active" data-lang="en">
                     <h2>Education</h2>
                     <div class="education-item">
                         <h3>Statistics (B.Sc) Student - Hacettepe University, Ankara/Turkey (2021-2024)</h3>
@@ -508,7 +569,7 @@
         <!-- VOLUNTEER TAB -->
         <div id="volunteer" class="tab-content">
             <div class="section">
-                <div class="language-content active" data-lang="tr">
+                <div class="language-content" data-lang="tr">
                     <h2>Gönüllü Çalışmalar</h2>
                     <div class="volunteer-item">
                         <h3>Hacettepe Üniversitesi İstatistik & Veri Bilimi Topluluğu</h3>
@@ -522,7 +583,7 @@
                         <p>• Python Bootcamp Mentoru (2022-2022)</p>
                     </div>
                 </div>
-                <div class="language-content" data-lang="en">
+                <div class="language-content active" data-lang="en">
                     <h2>Volunteer Work</h2>
                     <div class="volunteer-item">
                         <h3>Hacettepe University Statistics & Data Science Society</h3>
@@ -556,7 +617,7 @@
         <!-- SKILLS TAB -->
         <div id="skills" class="tab-content">
             <div class="section">
-                <div class="language-content active" data-lang="tr">
+                <div class="language-content" data-lang="tr">
                     <h2>Yeteneklerim</h2>
                     <div class="skills-grid">
                         <div class="skill-category">
@@ -586,7 +647,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="language-content" data-lang="en">
+                <div class="language-content active" data-lang="en">
                     <h2>Skills</h2>
                     <div class="skills-grid">
                         <div class="skill-category">
@@ -652,7 +713,7 @@
         <!-- CONTACT TAB -->
         <div id="contact" class="tab-content">
             <div class="section">
-                <div class="language-content active" data-lang="tr">
+                <div class="language-content" data-lang="tr">
                     <h2>İletişim</h2>
                     <div class="contact-info">
                         <p><strong>E-posta:</strong> <a href="mailto:emre@akkas.eu">emre@akkas.eu</a></p>
@@ -661,8 +722,26 @@
                             <a href="https://github.com/emresakkas" target="_blank">GitHub</a>
                         </div>
                     </div>
+                    <div class="contact-form">
+                        <h3>Bana Mesaj Gönder</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder="Adınız" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="surname" name="surname" placeholder="Soyadınız" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="E-posta Adresiniz" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" name="message" placeholder="Mesajınız" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Gönder</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="language-content" data-lang="en">
+                <div class="language-content active" data-lang="en">
                     <h2>Contact</h2>
                     <div class="contact-info">
                         <p><strong>E-mail:</strong> <a href="mailto:emre@akkas.eu">emre@akkas.eu</a></p>
@@ -670,6 +749,24 @@
                             <a href="https://www.linkedin.com/in/emreserhatakkas/" target="_blank">LinkedIn</a>
                             <a href="https://github.com/emresakkas" target="_blank">GitHub</a>
                         </div>
+                    </div>
+                    <div class="contact-form">
+                        <h3>Send Me a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="surname" name="surname" placeholder="Your Surname" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send</button>
+                        </form>
                     </div>
                 </div>
                 <div class="language-content" data-lang="de">
@@ -681,15 +778,33 @@
                             <a href="https://github.com/emresakkas" target="_blank">GitHub</a>
                         </div>
                     </div>
+                    <div class="contact-form">
+                        <h3>Nachricht Senden</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <input type="text" id="name" name="name" placeholder="Ihr Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="surname" name="surname" placeholder="Ihr Nachname" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" placeholder="Ihre E-Mail" required>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="message" name="message" placeholder="Ihre Nachricht" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Senden</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
 
         <div class="footer">
-            <div class="language-content active" data-lang="tr">
+            <div class="language-content" data-lang="tr">
                 <p>&copy; 2025 Emre Serhat Akkas</p>
             </div>
-            <div class="language-content" data-lang="en">
+            <div class="language-content active" data-lang="en">
                 <p>&copy; 2025 Emre Serhat Akkas</p>
             </div>
             <div class="language-content" data-lang="de">
@@ -698,8 +813,9 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-        let currentLanguage = 'tr';
+        let currentLanguage = 'en';
         let currentTab = 'about';
 
         function switchLanguage(lang) {
@@ -761,8 +877,44 @@
         // Initialize the page
         document.addEventListener('DOMContentLoaded', function() {
             // Set initial active states
-            switchLanguage('tr');
+            switchLanguage('en');
             showTab('about');
+        });
+
+        // Initialize EmailJS with your public key
+        (function() {
+            emailjs.init("kBlSmkktKnxBDx0h5");
+        })();
+
+        // Handle form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const name = document.getElementById('name').value;
+            const surname = document.getElementById('surname').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Send email using EmailJS
+            emailjs.send(
+                "service_n9buz4i",
+                "template_gij5r49",
+                {
+                    from_name: `${name} ${surname}`,
+                    from_email: email,
+                    message: message,
+                    to_email: "emre@akkas.eu"
+                }
+            )
+            .then(function() {
+                alert("Message sent successfully!");
+                document.getElementById('contactForm').reset();
+            })
+            .catch(function(error) {
+                alert("Failed to send message. Please try again later.");
+                console.error("Error:", error);
+            });
         });
     </script>
 </body>
