@@ -7,16 +7,49 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg: #f9f9f9;
+            --container-bg: #fff;
+            --card-bg: #e3f2fd;
+            --input-bg: #fff;
+            --input-border: #ddd;
+            --input-text: #222;
+            --input-placeholder: #888;
+            --text: #222;
+            --subtitle: #a0a0a0;
+            --primary: #0077cc;
+            --tab-bg-active: #e6f0fa;
+            --tab-shadow: 0 2px 12px 0 rgba(0,119,204,0.08);
+            --tab-underline: linear-gradient(90deg, #5bbcff 0%, #0077cc 100%);
+            --footer-bg: #f8f9fa;
+            --footer-text: #666;
+            --modal-bg: #fff;
+            --modal-overlay: rgba(0,0,0,0.5);
+        }
+        .dark-mode {
+            --bg: #181c22;
+            --container-bg: #23272f;
+            --card-bg: #232f3a;
+            --input-bg: #23272f;
+            --input-border: #444c56;
+            --input-text: #f3f3f3;
+            --input-placeholder: #888;
+            --text: #f3f3f3;
+            --subtitle: #b3b3b3;
+            --primary: #5bbcff;
+            --tab-bg-active: #22304a;
+            --tab-shadow: 0 2px 12px 0 rgba(91,188,255,0.10);
+            --tab-underline: linear-gradient(90deg, #5bbcff 0%, #0077cc 100%);
+            --footer-bg: #23272f;
+            --footer-text: #b3b3b3;
+            --modal-bg: #23272f;
+            --modal-overlay: rgba(0,0,0,0.7);
         }
 
         body {
+            background-color: var(--bg);
+            color: var(--text);
             font-family: 'Inter', sans-serif;
-            background-color: #f9f9f9;
-            color: #222;
             line-height: 1.6;
         }
 
@@ -25,7 +58,7 @@
             top: 20px;
             right: 20px;
             z-index: 1000;
-            background: white;
+            background: var(--container-bg);
             border-radius: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             padding: 5px;
@@ -41,12 +74,12 @@
             cursor: pointer;
             font-size: 0.9rem;
             font-weight: 500;
-            color: #666;
+            color: var(--subtitle);
             transition: all 0.3s ease;
         }
 
         .lang-btn.active {
-            background: #0077cc;
+            background: var(--primary);
             color: white;
         }
 
@@ -58,7 +91,7 @@
         .container {
             max-width: 1000px;
             margin: 20px auto;
-            background: white;
+            background: var(--container-bg);
             box-shadow: 0 0 30px rgba(0,0,0,0.08);
             border-radius: 20px;
             overflow: hidden;
@@ -70,11 +103,74 @@
             padding: 40px 40px 20px 40px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .profile-section {
+            text-align: center;
+        }
+
+        .widgets-section {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .calendar-widget {
+            background: var(--tab-bg-active);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 10px 12px;
+            min-width: 160px;
+            max-width: 220px;
+            font-size: 0.85rem;
+            margin: 30px auto 0 auto;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+            text-align: center;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 0.95em;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+        }
+
+        .calendar-day {
+            font-size: 0.75rem;
+            padding: 3px 0;
+            border-radius: 4px;
+        }
+
+        .calendar-day.today {
+            background: #2ecc40;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .calendar-day.other-month {
+            opacity: 0.4;
         }
 
         .profile-pic {
-            width: 120px;
-            height: 120px;
+            width: 170px;
+            height: 170px;
             object-fit: cover;
             border-radius: 50%;
             margin: 0 auto 20px auto;
@@ -93,28 +189,32 @@
             font-size: 1.2rem;
             opacity: 0.9;
             font-weight: 400;
+            color: var(--subtitle);
         }
 
         .tabs-nav {
             display: flex;
-            background: white;
+            background: var(--container-bg);
             border-bottom: 1px solid #e0e0e0;
-            overflow-x: auto;
+            gap: 8px;
+            flex-wrap: wrap;
         }
 
         .tab-button {
             flex: 1;
-            padding: 20px 25px;
+            padding: 18px 22px;
             background: none;
             border: none;
-            color: #666;
-            font-size: 1rem;
+            color: var(--subtitle);
+            font-size: 0.97rem;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
-            min-width: 120px;
+            min-width: 140px;
             font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+            text-align: center;
         }
 
         .tab-button:hover {
@@ -123,8 +223,10 @@
         }
 
         .tab-button.active {
-            color: #0077cc;
-            background: #f8f9ff;
+            color: var(--primary);
+            background: var(--tab-bg-active);
+            box-shadow: var(--tab-shadow);
+            position: relative;
         }
 
         .tab-button.active::after {
@@ -133,8 +235,10 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 3px;
-            background: #0077cc;
+            height: 4px;
+            background: var(--tab-underline);
+            border-radius: 2px 2px 0 0;
+            box-shadow: 0 2px 8px 0 rgba(0,119,204,0.10);
         }
 
         .tab-content {
@@ -160,7 +264,7 @@
         }
 
         .section h2 {
-            color: #333;
+            color: var(--text);
             border-bottom: 2px solid #e0e0e0;
             padding-bottom: 10px;
             margin-bottom: 25px;
@@ -169,7 +273,7 @@
         }
 
         .section h3 {
-            color: #0077cc;
+            color: var(--primary);
             margin-bottom: 10px;
             margin-top: 25px;
             font-size: 1.3rem;
@@ -195,7 +299,7 @@
 
         .section li::before {
             content: '▸';
-            color: #0077cc;
+            color: var(--primary);
             position: absolute;
             left: 0;
             top: 8px;
@@ -209,10 +313,10 @@
         }
 
         .skill-category {
-            background: #f8f9fa;
+            background: var(--tab-bg-active);
             padding: 25px;
             border-radius: 15px;
-            border-left: 4px solid #0077cc;
+            border-left: 4px solid var(--primary);
         }
 
         .skill-category h3 {
@@ -221,36 +325,36 @@
         }
 
         .contact-info {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: var(--card-bg);
             padding: 30px;
             border-radius: 15px;
             text-align: center;
         }
 
         .contact-info a {
-            color: #0077cc;
+            color: var(--primary);
             text-decoration: none;
             font-weight: 500;
             padding: 10px 20px;
             margin: 5px;
             display: inline-block;
             border-radius: 25px;
-            background: white;
+            background: var(--container-bg);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
         }
 
         .contact-info a:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,119,204,0.3);
+            box-shadow: 0 4px 15px var(--primary, #0077cc, 0.3);
         }
 
         .experience-item, .education-item {
-            background: #f8f9fa;
+            background: var(--tab-bg-active);
             padding: 25px;
             margin-bottom: 20px;
             border-radius: 15px;
-            border-left: 4px solid #0077cc;
+            border-left: 4px solid var(--primary);
         }
 
         .experience-item h3, .education-item h3 {
@@ -258,28 +362,81 @@
         }
 
         .volunteer-item {
-            background: #f8f9fa;
+            background: var(--tab-bg-active);
             padding: 25px;
             margin-bottom: 20px;
             border-radius: 15px;
-            border-left: 4px solid #0077cc;
+            border-left: 4px solid var(--primary);
         }
 
         .volunteer-item h3 {
             margin-top: 0;
-            color: #0077cc;
+            color: var(--primary);
         }
 
         .footer {
             text-align: center;
             padding: 30px;
-            background: #f8f9fa;
-            color: #666;
+            background: var(--footer-bg);
+            color: var(--footer-text);
             font-size: 0.9rem;
         }
 
+        .impressum-link {
+            display: block;
+            font-size: 1.15rem;
+            font-family: 'Inter', sans-serif;
+            text-decoration: underline;
+            color: var(--text);
+            margin-bottom: 10px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .impressum-modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--modal-overlay);
+            justify-content: center;
+            align-items: center;
+        }
+        .impressum-modal.active {
+            display: flex;
+        }
+        .impressum-modal-content {
+            background: var(--modal-bg);
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90vw;
+            padding: 40px 30px 30px 30px;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            font-family: 'Inter', sans-serif;
+        }
+        .impressum-modal-close {
+            position: absolute;
+            top: 18px;
+            right: 24px;
+            font-size: 2rem;
+            color: #888;
+            cursor: pointer;
+            font-weight: bold;
+            background: none;
+            border: none;
+        }
+        @media (max-width: 600px) {
+            .impressum-modal-content {
+                padding: 20px 10px 15px 10px;
+            }
+        }
+
         .about-intro {
-            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            background: var(--card-bg);
             padding: 30px;
             border-radius: 15px;
             margin-bottom: 30px;
@@ -293,27 +450,34 @@
             }
             
             .tabs-nav {
-                flex-direction: column;
+                flex-wrap: wrap;
+                gap: 4px;
             }
-            
             .tab-button {
-                min-width: auto;
+                min-width: 110px;
+                font-size: 0.89rem;
+                padding: 11px 6px;
             }
             
             .tab-content {
                 padding: 20px;
             }
             
-            .header {
-                padding: 30px 20px 15px 20px;
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
             }
             
-            .header h1 {
-                font-size: 2rem;
+            .widgets-section {
+                flex-direction: column;
+                width: 100%;
+                align-items: center;
             }
             
-            .skills-grid {
-                grid-template-columns: 1fr;
+            .calendar-widget {
+                width: 100%;
+                max-width: 250px;
+                margin: 0 auto;
             }
             
             .language-switcher {
@@ -332,15 +496,15 @@
 
         .contact-form {
             margin-top: 40px;
-            background: #f8f9fa;
+            background: var(--tab-bg-active);
             padding: 30px;
             border-radius: 15px;
-            border-left: 4px solid #0077cc;
+            border-left: 4px solid var(--primary);
         }
 
         .contact-form h3 {
             margin-bottom: 20px;
-            color: #0077cc;
+            color: var(--primary);
         }
 
         .form-group {
@@ -351,11 +515,13 @@
         .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--input-border);
             border-radius: 8px;
             font-size: 1rem;
             font-family: 'Inter', sans-serif;
-            transition: border-color 0.3s ease;
+            transition: border-color 0.3s ease, background 0.3s, color 0.3s;
+            background: var(--input-bg);
+            color: var(--input-text);
         }
 
         .form-group textarea {
@@ -370,8 +536,14 @@
             box-shadow: 0 0 0 2px rgba(0,119,204,0.1);
         }
 
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--input-placeholder);
+            opacity: 1;
+        }
+
         .submit-btn {
-            background: #0077cc;
+            background: var(--primary);
             color: white;
             border: none;
             padding: 12px 30px;
@@ -390,6 +562,265 @@
         .submit-btn:active {
             transform: translateY(0);
         }
+
+        /* Blog Styles */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .blog-card {
+            background: var(--container-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .blog-thumbnail {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .blog-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover .blog-thumbnail img {
+            transform: scale(1.05);
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        .blog-content h3 {
+            margin: 0 0 10px 0;
+            color: var(--text);
+            font-size: 1.3rem;
+        }
+
+        .blog-date {
+            color: var(--subtitle);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .blog-excerpt {
+            color: var(--text);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 8px 20px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+
+        .read-more:hover {
+            background: #005fa3;
+        }
+
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--modal-overlay);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: var(--modal-bg);
+            margin: 50px auto;
+            padding: 30px;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 20px;
+            position: relative;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 30px;
+            font-weight: bold;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        .blog-post {
+            line-height: 1.8;
+        }
+
+        .blog-post img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .blog-post h2 {
+            color: var(--text);
+            margin-bottom: 20px;
+        }
+
+        .blog-post p {
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        @media (max-width: 768px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 20px;
+                padding: 20px;
+            }
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            margin-bottom: 10px;
+        }
+        .impressum-link {
+            margin-bottom: 0;
+        }
+
+        /* For German, make tab font-size a bit smaller for long words */
+        html[lang="de"] .tab-button {
+            font-size: 0.93rem;
+            min-width: 150px;
+        }
+
+        .blog-subtitle {
+            font-size: 1.05rem;
+            color: var(--text);
+            margin-bottom: 2px;
+            margin-top: 0;
+            font-weight: 400;
+            opacity: 1;
+        }
+
+        /* Success Modal */
+        .success-modal {
+            display: none;
+            position: fixed;
+            z-index: 3000;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--modal-overlay);
+            justify-content: center;
+            align-items: center;
+        }
+        .success-modal.active {
+            display: flex;
+        }
+        .success-modal-content {
+            background: var(--modal-bg);
+            border-radius: 18px;
+            padding: 40px 30px 30px 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            text-align: center;
+            min-width: 260px;
+            max-width: 90vw;
+        }
+        .success-check {
+            font-size: 3.2rem;
+            color: #2ecc40;
+            margin-bottom: 18px;
+        }
+        .success-message {
+            font-size: 1.15rem;
+            color: var(--text);
+            margin-bottom: 18px;
+        }
+        .success-close-btn {
+            background: #2ecc40;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 10px 28px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .success-close-btn:hover {
+            background: #27ae38;
+        }
+
+        .contact-form-container {
+            flex: 1;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .google-form-iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            background: transparent;
+        }
+
+        /* Google Form styling overrides */
+        .google-form-iframe {
+            filter: var(--form-filter);
+        }
+
+        /* Dark mode adjustments for Google Form */
+        [data-theme="dark"] .google-form-iframe {
+            --form-filter: invert(1) hue-rotate(180deg);
+        }
     </style>
 </head>
 <body>
@@ -401,18 +832,22 @@
 
     <div class="container">
         <div class="header">
-            <img src="profile.jpg" alt="Profile Picture" class="profile-pic" />
-            <div class="language-content" data-lang="tr">
-                <h1>Emre Serhat Akkas</h1>
-                <p class="subtitle">Veri Bilimci · Python | SQL | Makine Öğrenmesi</p>
-            </div>
-            <div class="language-content active" data-lang="en">
-                <h1>Emre Serhat Akkas</h1>
-                <p class="subtitle">Data Scientist · Python | SQL | Machine Learning</p>
-            </div>
-            <div class="language-content" data-lang="de">
-                <h1>Emre Serhat Akkas</h1>
-                <p class="subtitle">Data Scientist · Python | SQL | Maschinelles Lernen</p>
+            <div class="header-content">
+                <div class="profile-section">
+                    <img src="profile.jpg" alt="Profile Picture" class="profile-pic" />
+                    <div class="language-content" data-lang="tr">
+                        <h1>Emre Serhat Akkas</h1>
+                        <p class="subtitle">Veri Bilimci · Python | SQL | Makine Öğrenmesi</p>
+                    </div>
+                    <div class="language-content active" data-lang="en">
+                        <h1>Emre Serhat Akkas</h1>
+                        <p class="subtitle">Data Scientist · Python | SQL | Machine Learning</p>
+                    </div>
+                    <div class="language-content" data-lang="de">
+                        <h1>Emre Serhat Akkas</h1>
+                        <p class="subtitle">Data Scientist · Python | SQL | Maschinelles Lernen</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -435,12 +870,17 @@
             <button class="tab-button" onclick="showTab('volunteer')">
                 <span class="language-content" data-lang="tr">Gönüllülük</span>
                 <span class="language-content active" data-lang="en">Volunteer</span>
-                <span class="language-content" data-lang="de">Freiwilligen Arbeit</span>
+                <span class="language-content" data-lang="de">Freiwillige Arbeit</span>
             </button>
             <button class="tab-button" onclick="showTab('skills')">
                 <span class="language-content" data-lang="tr">Yetenekler</span>
                 <span class="language-content active" data-lang="en">Skills</span>
                 <span class="language-content" data-lang="de">Fähigkeiten</span>
+            </button>
+            <button class="tab-button" onclick="showTab('blog')">
+                <span class="language-content" data-lang="tr">Blog</span>
+                <span class="language-content active" data-lang="en">Blog</span>
+                <span class="language-content" data-lang="de">Blog</span>
             </button>
             <button class="tab-button" onclick="showTab('contact')">
                 <span class="language-content" data-lang="tr">İletişim</span>
@@ -458,6 +898,16 @@
                         <p>Veri Bilimi (Lisans) öğrencisiyim ve Veri Analitiği, İstatistik, Finansal Matematik ve Aktüerya Bilimleri alanlarıyla ilgileniyorum. İstatistik ve Veri Bilimi alanında tutkulu bir araştırmacı ve uygulayıcıyım. Python ve SQL ile veri analizi, görselleştirme ve makine öğrenmesi projeleri geliştiriyorum.</p>
                         <p>Detaylı bilgi ve iletişim için İletişim kısmında bulunan LinkedIn hesabımdan ulaşabilirsiniz.</p>
                     </div>
+                    <div class="calendar-widget">
+                        <div class="calendar-header">
+                            <button onclick="previousMonth()">&lt;</button>
+                            <span id="currentMonth-tr">Mart 2024</span>
+                            <button onclick="nextMonth()">&gt;</button>
+                        </div>
+                        <div class="calendar-grid" id="calendarGrid-tr">
+                            <!-- Calendar days will be inserted here by JavaScript -->
+                        </div>
+                    </div>
                 </div>
                 <div class="language-content active" data-lang="en">
                     <div class="about-intro">
@@ -465,12 +915,32 @@
                         <p>I'm a Data Science (B.Sc.) student, interested in Data Analytics, Statistics, Financial Mathematics and Actuarial Sciences. I am a passionate researcher and practitioner in the field of Statistics and Data Science. I develop data analysis, visualization and machine learning projects with Python and SQL.</p>
                         <p>For detailed information and contact, you can reach my LinkedIn account from my LinkedIn account in the contact section.</p>
                     </div>
+                    <div class="calendar-widget">
+                        <div class="calendar-header">
+                            <button onclick="previousMonth()">&lt;</button>
+                            <span id="currentMonth-en">March 2024</span>
+                            <button onclick="nextMonth()">&gt;</button>
+                        </div>
+                        <div class="calendar-grid" id="calendarGrid-en">
+                            <!-- Calendar days will be inserted here by JavaScript -->
+                        </div>
+                    </div>
                 </div>
                 <div class="language-content" data-lang="de">
                     <div class="about-intro">
                         <h2>Über mich</h2>
                         <p>Ich bin Student der Data Science (B.Sc.) und interessiere mich für Datenanalytik, Statistik, Finanzmathematik und Versicherungsmathematik. Ich bin ein leidenschaftlicher Forscher und Praktiker im Bereich Statistik und Datenwissenschaft. Ich entwickle Datenanalyse-, Visualisierungs- und Machine-Learning-Projekte mit Python und SQL.</p>
                         <p>Für detaillierte Informationen und Kontakt können Sie mein LinkedIn-Konto im Kontaktbereich erreichen.</p>
+                    </div>
+                    <div class="calendar-widget">
+                        <div class="calendar-header">
+                            <button onclick="previousMonth()">&lt;</button>
+                            <span id="currentMonth-de">März 2024</span>
+                            <button onclick="nextMonth()">&gt;</button>
+                        </div>
+                        <div class="calendar-grid" id="calendarGrid-de">
+                            <!-- Calendar days will be inserted here by JavaScript -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -598,7 +1068,7 @@
                     </div>
                 </div>
                 <div class="language-content" data-lang="de">
-                    <h2>Freiwilligen Arbeit</h2>
+                    <h2>Freiwillige Arbeit</h2>
                     <div class="volunteer-item">
                         <h3>Hacettepe Universität Statistik & Data Science Gesellschaft</h3>
                         <p>• Präsident (2023-2024)</p>
@@ -710,11 +1180,68 @@
             </div>
         </div>
 
-        <!-- CONTACT TAB -->
-        <div id="contact" class="tab-content">
+        <!-- BLOG TAB -->
+        <div id="blog" class="tab-content">
             <div class="section">
                 <div class="language-content" data-lang="tr">
-                    <h2>İletişim</h2>
+                    <div class="blog-subtitle">İngilizce versiyon mümkün</div>
+                    <h2>Medium Yazılarım</h2>
+                    <div class="blog-grid">
+                        <div class="blog-card">
+                            <div class="blog-thumbnail">
+                                <img src="jotform2024.png" alt="Jotform Internship Experience">
+                            </div>
+                            <div class="blog-content">
+                                <h3>Jotform'da Staj Deneyimi</h3>
+                                <p class="blog-date">8 Ağustos 2022</p>
+                                <p class="blog-excerpt">Jotform'da veri analisti stajyeri olarak edindiğim deneyimler ve öğrendiklerim...</p>
+                                <a href="https://medium.com/@emresakkas/an-internship-experience-at-jotform-1d57d46f61e7" target="_blank" class="read-more">Medium'da Oku</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="language-content active" data-lang="en">
+                    <div class="blog-subtitle">English version available</div>
+                    <h2>My Medium Articles</h2>
+                    <div class="blog-grid">
+                        <div class="blog-card">
+                            <div class="blog-thumbnail">
+                                <img src="jotform2024.png" alt="Jotform Internship Experience">
+                            </div>
+                            <div class="blog-content">
+                                <h3>An Internship Experience at Jotform</h3>
+                                <p class="blog-date">August 8, 2022</p>
+                                <p class="blog-excerpt">My experiences and learnings as a data analyst intern at Jotform...</p>
+                                <a href="https://medium.com/@emresakkas/an-internship-experience-at-jotform-1d57d46f61e7" target="_blank" class="read-more">Read on Medium</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="language-content" data-lang="de">
+                    <div class="blog-subtitle">Englische Version möglich</div>
+                    <h2>Meine Medium-Artikel</h2>
+                    <div class="blog-grid">
+                        <div class="blog-card">
+                            <div class="blog-thumbnail">
+                                <img src="jotform2024.png" alt="Jotform Internship Experience">
+                            </div>
+                            <div class="blog-content">
+                                <h3>Ein Praktikumserlebnis bei Jotform</h3>
+                                <p class="blog-date">8. August 2022</p>
+                                <p class="blog-excerpt">Meine Erfahrungen und Erkenntnisse als Datenanalyst-Praktikant bei Jotform...</p>
+                                <a href="https://medium.com/@emresakkas/an-internship-experience-at-jotform-1d57d46f61e7" target="_blank" class="read-more">Auf Medium lesen</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT TAB -->
+        <div id="contact" class="tab-content">
+            <div class="language-content" data-lang="tr">
+                <h2>İletişim</h2>
+                <div class="contact-container">
                     <div class="contact-info">
                         <p><strong>E-posta:</strong> <a href="mailto:emre@akkas.eu">emre@akkas.eu</a></p>
                         <div style="margin-top: 20px;">
@@ -737,12 +1264,18 @@
                             <div class="form-group">
                                 <textarea id="message" name="message" placeholder="Mesajınız" required></textarea>
                             </div>
+                            <div class="form-group consent-group">
+                                <input type="checkbox" id="consent-tr" name="consent-tr" required>
+                                <label for="consent-tr">Verilerimin <a href="#" onclick="openDatenschutzModal();return false;" style="text-decoration:underline;cursor:pointer;">Gizlilik Politikası</a>'na uygun olarak işlenmesini kabul ediyorum.</label>
+                            </div>
                             <button type="submit" class="submit-btn">Gönder</button>
                         </form>
                     </div>
                 </div>
-                <div class="language-content active" data-lang="en">
-                    <h2>Contact</h2>
+            </div>
+            <div class="language-content" data-lang="en">
+                <h2>Contact</h2>
+                <div class="contact-container">
                     <div class="contact-info">
                         <p><strong>E-mail:</strong> <a href="mailto:emre@akkas.eu">emre@akkas.eu</a></p>
                         <div style="margin-top: 20px;">
@@ -765,12 +1298,18 @@
                             <div class="form-group">
                                 <textarea id="message" name="message" placeholder="Your Message" required></textarea>
                             </div>
+                            <div class="form-group consent-group">
+                                <input type="checkbox" id="consent-en" name="consent-en" required>
+                                <label for="consent-en">I agree that my data will be processed in accordance with the <a href="#" onclick="openDatenschutzModal();return false;" style="text-decoration:underline;cursor:pointer;">Privacy Policy</a>.</label>
+                            </div>
                             <button type="submit" class="submit-btn">Send</button>
                         </form>
                     </div>
                 </div>
-                <div class="language-content" data-lang="de">
-                    <h2>Kontakt</h2>
+            </div>
+            <div class="language-content" data-lang="de">
+                <h2>Kontakt</h2>
+                <div class="contact-container">
                     <div class="contact-info">
                         <p><strong>E-Mail:</strong> <a href="mailto:emre@akkas.eu">emre@akkas.eu</a></p>
                         <div style="margin-top: 20px;">
@@ -793,6 +1332,10 @@
                             <div class="form-group">
                                 <textarea id="message" name="message" placeholder="Ihre Nachricht" required></textarea>
                             </div>
+                            <div class="form-group consent-group">
+                                <input type="checkbox" id="consent-de" name="consent-de" required>
+                                <label for="consent-de">Ich stimme zu, dass meine Daten gemäß der <a href="#" onclick="openDatenschutzModal();return false;" style="text-decoration:underline;cursor:pointer;">Datenschutzerklärung</a> verarbeitet werden.</label>
+                            </div>
                             <button type="submit" class="submit-btn">Senden</button>
                         </form>
                     </div>
@@ -801,6 +1344,14 @@
         </div>
 
         <div class="footer">
+            <div class="footer-links">
+                <span class="impressum-link language-content active" data-lang="en" onclick="openImpressumModal()">Legal Notice</span>
+                <span class="impressum-link language-content" data-lang="tr" onclick="openImpressumModal()">Yasal Bilgilendirme</span>
+                <span class="impressum-link language-content" data-lang="de" onclick="openImpressumModal()">Impressum</span>
+                <span class="impressum-link language-content active" data-lang="en" onclick="openDatenschutzModal()">Privacy Policy</span>
+                <span class="impressum-link language-content" data-lang="tr" onclick="openDatenschutzModal()">Gizlilik Politikası</span>
+                <span class="impressum-link language-content" data-lang="de" onclick="openDatenschutzModal()">Datenschutzerklärung</span>
+            </div>
             <div class="language-content" data-lang="tr">
                 <p>&copy; 2025 Emre Serhat Akkas</p>
             </div>
@@ -813,6 +1364,122 @@
         </div>
     </div>
 
+    <!-- Impressum Modal -->
+    <div class="impressum-modal" id="impressumModal">
+        <div class="impressum-modal-content">
+            <button class="impressum-modal-close" onclick="closeImpressumModal()">&times;</button>
+            <h2>
+                <span class="language-content" data-lang="de">Impressum</span>
+                <span class="language-content active" data-lang="en">Legal Notice</span>
+                <span class="language-content" data-lang="tr">Yasal Bilgilendirme</span>
+            </h2>
+            <div class="impressum-lang" data-lang="de">
+                <p>Angaben gemäß § 5 TMG:</p>
+                <p><strong>Verantwortlich für Inhalte:</strong><br>
+                Emre Serhat Akkas<br>
+                emre@akkas.eu</p>
+                <p><strong>Standort:</strong> 35039 Marburg, Deutschland</p>
+            </div>
+            <div class="impressum-lang" data-lang="en" style="display:none">
+                <p>Information according to § 5 TMG:</p>
+                <p><strong>Responsible for content:</strong><br>
+                Emre Serhat Akkas<br>
+                emre@akkas.eu</p>
+                <p><strong>Location:</strong> 35039 Marburg, Germany</p>
+            </div>
+            <div class="impressum-lang" data-lang="tr" style="display:none">
+                <p>§ 5 TMG uyarınca bilgiler:</p>
+                <p><strong>İçerikten sorumlu:</strong><br>
+                Emre Serhat Akkas<br>
+                emre@akkas.eu</p>
+                <p><strong>Adres:</strong> 35039 Marburg, Almanya</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Datenschutzerklärung Modal -->
+    <div class="impressum-modal" id="datenschutzModal">
+        <div class="impressum-modal-content">
+            <button class="impressum-modal-close" onclick="closeDatenschutzModal()">&times;</button>
+            <h2>
+                <span class="language-content active" data-lang="en">Privacy Policy</span>
+                <span class="language-content" data-lang="tr">Gizlilik Politikası</span>
+                <span class="language-content" data-lang="de">Datenschutzerklärung</span>
+            </h2>
+            <div id="datenschutzContent">
+                <div class="impressum-lang" data-lang="de">
+                    <p><strong>1. Verantwortlicher</strong><br>
+                    Emre Serhat Akkas<br>
+                    emre@akkas.eu</p>
+                    <p><strong>2. Datenverarbeitung im Kontaktformular</strong><br>
+                    Wenn Sie das Kontaktformular nutzen, werden nur folgende Daten gespeichert:<br>
+                    - Name (für persönliche Ansprache)<br>
+                    - E-Mail-Adresse (für die Antwort)</p>
+                    <p>Speicherdauer: Die Daten werden nach Bearbeitung Ihrer Anfrage gelöscht, spätestens nach 6 Monaten.</p>
+                    <p><strong>3. Rechtsgrundlage</strong><br>
+                    Die Verarbeitung erfolgt auf Basis von Art. 6 Abs. 1 lit. b DSGVO (vertragliche Vorbereitung).</p>
+                    <p><strong>4. Weitergabe an Dritte</strong><br>
+                    Ihre Daten werden nicht an Dritte weitergegeben (außer bei technisch notwendigen Dienstleistern, z.B. dem E-Mail-Anbieter).</p>
+                    <p><strong>5. Ihre Rechte</strong><br>
+                    Sie haben das Recht auf:<br>
+                    - Auskunft über gespeicherte Daten,<br>
+                    - Berichtigung oder Löschung,<br>
+                    - Widerspruch gegen die Verarbeitung,<br>
+                    - Beschwerde bei einer Aufsichtsbehörde (z.B. www.bfdi.bund.de).</p>
+                    <p>Kontaktieren Sie mich unter: emre@akkas.eu</p>
+                    <p><strong>6. Änderungen</strong><br>
+                    Diese Datenschutzerklärung kann aktualisiert werden. Letzte Aktualisierung: 10.06.2025.</p>
+                </div>
+                <div class="impressum-lang" data-lang="en" style="display:none">
+                    <p><strong>1. Controller</strong><br>
+                    Emre Serhat Akkas<br>
+                    emre@akkas.eu</p>
+                    <p><strong>2. Data Processing in the Contact Form</strong><br>
+                    If you use the contact form, only the following data will be stored:<br>
+                    - Name (for personal addressing)<br>
+                    - E-mail address (for reply)</p>
+                    <p>Storage period: The data will be deleted after your request has been processed, at the latest after 6 months.</p>
+                    <p><strong>3. Legal Basis</strong><br>
+                    Processing is based on Art. 6 para. 1 lit. b GDPR (pre-contractual measures).</p>
+                    <p><strong>4. Disclosure to Third Parties</strong><br>
+                    Your data will not be passed on to third parties (except for technically necessary service providers, e.g. the e-mail provider).</p>
+                    <p><strong>5. Your Rights</strong><br>
+                    You have the right to:<br>
+                    - Information about stored data,<br>
+                    - Correction or deletion,<br>
+                    - Objection to processing,<br>
+                    - Complaint to a supervisory authority (e.g. www.bfdi.bund.de).</p>
+                    <p>Contact me at: emre@akkas.eu</p>
+                    <p><strong>6. Changes</strong><br>
+                    This privacy policy may be updated. Last update: 10.06.2025.</p>
+                </div>
+                <div class="impressum-lang" data-lang="tr" style="display:none">
+                    <p><strong>1. Veri Sorumlusu</strong><br>
+                    Emre Serhat Akkas<br>
+                    emre@akkas.eu</p>
+                    <p><strong>2. İletişim Formunda Veri İşleme</strong><br>
+                    İletişim formunu kullandığınızda yalnızca şu veriler kaydedilir:<br>
+                    - Ad (kişisel hitap için)<br>
+                    - E-posta adresi (yanıt için)</p>
+                    <p>Saklama süresi: Verileriniz talebiniz yanıtlandıktan sonra, en geç 6 ay içinde silinir.</p>
+                    <p><strong>3. Hukuki Dayanak</strong><br>
+                    İşleme, GDPR Madde 6 paragraf 1 bent b'ye (sözleşme öncesi hazırlık) dayanır.</p>
+                    <p><strong>4. Üçüncü Taraflara Aktarım</strong><br>
+                    Verileriniz üçüncü şahıslara aktarılmaz (teknik olarak gerekli hizmet sağlayıcılar hariç, ör. e-posta sağlayıcısı).</p>
+                    <p><strong>5. Haklarınız</strong><br>
+                    Şu haklara sahipsiniz:<br>
+                    - Saklanan veriler hakkında bilgi alma,<br>
+                    - Düzeltme veya silme,<br>
+                    - İşlemeye itiraz,<br>
+                    - Bir denetim makamına şikayet (ör. www.bfdi.bund.de).</p>
+                    <p>Benimle şu adresten iletişime geçebilirsiniz: emre@akkas.eu</p>
+                    <p><strong>6. Değişiklikler</strong><br>
+                    Bu gizlilik politikası güncellenebilir. Son güncelleme: 10.06.2025.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
         let currentLanguage = 'en';
@@ -820,7 +1487,6 @@
 
         function switchLanguage(lang) {
             currentLanguage = lang;
-            
             // Update language buttons
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.classList.remove('active');
@@ -836,49 +1502,71 @@
             document.querySelectorAll(`[data-lang="${lang}"]`).forEach(content => {
                 content.classList.add('active');
             });
+
+            // Also update tab button label visibility
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.querySelectorAll('.language-content').forEach(span => {
+                    if (span.getAttribute('data-lang') === lang) {
+                        span.classList.add('active');
+                    } else {
+                        span.classList.remove('active');
+                    }
+                });
+            });
         }
 
         function showTab(tabName) {
             currentTab = tabName;
-            
             // Hide all tab contents
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
             });
-            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
             // Remove active class from all tab buttons
             document.querySelectorAll('.tab-button').forEach(button => {
                 button.classList.remove('active');
             });
-            
-            // Show selected tab
-            document.getElementById(tabName).classList.add('active');
-            
-            // Add active class to clicked button
-            event.target.classList.add('active');
+            // Add active to the correct tab button
+            document.querySelectorAll('.tab-button').forEach(button => {
+                if (button.getAttribute('onclick') && button.getAttribute('onclick').includes(`showTab('${tabName}')`)) {
+                    button.classList.add('active');
+                }
+            });
         }
 
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.altKey) {
-                const tabs = ['about', 'experience', 'education', 'volunteer', 'skills', 'contact'];
-                const currentIndex = tabs.indexOf(currentTab);
-                
-                if (e.key === 'ArrowRight' && currentIndex < tabs.length - 1) {
-                    e.preventDefault();
-                    document.querySelectorAll('.tab-button')[currentIndex + 1].click();
-                } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
-                    e.preventDefault();
-                    document.querySelectorAll('.tab-button')[currentIndex - 1].click();
+        // Ensure active tab button is correct after language switch
+        function updateActiveTabButton() {
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(button => {
+                if (button.getAttribute('onclick') && button.getAttribute('onclick').includes(`showTab('${currentTab}')`)) {
+                    button.classList.add('active');
                 }
-            }
-        });
+            });
+        }
 
-        // Initialize the page
+        // Patch language switcher to also update tab button
+        const origSwitchLanguage = switchLanguage;
+        switchLanguage = function(lang) {
+            origSwitchLanguage(lang);
+            updateActiveTabButton();
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             // Set initial active states
             switchLanguage('en');
             showTab('about');
+            updateActiveTabButton();
+            // Ensure only English is active everywhere on first load
+            document.querySelectorAll('.language-content').forEach(el => {
+                if (el.getAttribute('data-lang') === 'en') {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            });
         });
 
         // Initialize EmailJS with your public key
@@ -886,36 +1574,408 @@
             emailjs.init("kBlSmkktKnxBDx0h5");
         })();
 
+        // Calendar Functionality
+        let currentDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+
+        const calendarLocales = {
+            tr: {
+                weekDays: ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'],
+                months: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık']
+            },
+            en: {
+                weekDays: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+            },
+            de: {
+                weekDays: ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'],
+                months: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember']
+            }
+        };
+
+        function getActiveLang() {
+            const active = document.querySelector('.language-content.active');
+            return active ? active.getAttribute('data-lang') : 'en';
+        }
+
+        function updateCalendar() {
+            const lang = getActiveLang();
+            const locale = calendarLocales[lang] || calendarLocales['en'];
+            const monthNames = locale.months;
+            const weekDays = locale.weekDays;
+            const gridId = `calendarGrid-${lang}`;
+            const monthId = `currentMonth-${lang}`;
+            const calendarGrid = document.getElementById(gridId);
+            const monthLabel = document.getElementById(monthId);
+            if (!calendarGrid || !monthLabel) return;
+
+            // Update month and year display
+            monthLabel.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+            // Clear previous calendar
+            calendarGrid.innerHTML = '';
+
+            // Add week day headers
+            weekDays.forEach(day => {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                calendarGrid.appendChild(dayElement);
+            });
+
+            // Calculate first and last day
+            const firstDay = new Date(currentYear, currentMonth, 1);
+            const lastDay = new Date(currentYear, currentMonth + 1, 0);
+            // Adjust for week start (Monday)
+            let startingDay = firstDay.getDay() - 1;
+            if (startingDay < 0) startingDay = 6;
+            const totalDays = lastDay.getDate();
+
+            // Add previous month's days
+            const prevMonthLastDay = new Date(currentYear, currentMonth, 0).getDate();
+            for (let i = startingDay - 1; i >= 0; i--) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month';
+                dayElement.textContent = prevMonthLastDay - i;
+                calendarGrid.appendChild(dayElement);
+            }
+
+            // Add current month's days
+            for (let day = 1; day <= totalDays; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                // Highlight today
+                const now = new Date();
+                if (
+                    day === now.getDate() &&
+                    currentMonth === now.getMonth() &&
+                    currentYear === now.getFullYear() &&
+                    lang === getActiveLang()
+                ) {
+                    dayElement.classList.add('today');
+                }
+                calendarGrid.appendChild(dayElement);
+            }
+
+            // Add next month's days to fill the grid (up to 6 rows)
+            const totalCells = startingDay + totalDays + weekDays.length; // weekDays.length = 7
+            const remainingDays = (Math.ceil(totalCells / 7) * 7) - totalCells;
+            for (let day = 1; day <= remainingDays; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day other-month';
+                dayElement.textContent = day;
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+
+        function previousMonth() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            updateCalendar();
+        }
+
+        function nextMonth() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            updateCalendar();
+        }
+
+        // Update calendar on language switch
+        function observeLanguageSwitch() {
+            const observer = new MutationObserver(() => {
+                setTimeout(updateCalendar, 10);
+            });
+            document.querySelectorAll('.language-content').forEach(el => {
+                observer.observe(el, { attributes: true, attributeFilter: ['class'] });
+            });
+        }
+
+        // Initialize widgets
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCalendar();
+            observeLanguageSwitch();
+        });
+
+        // Add JS for modal
+        function openImpressumModal() {
+            document.getElementById('impressumModal').classList.add('active');
+            let lang = 'en';
+            if (document.querySelector('.language-content.active[data-lang="tr"]')) lang = 'tr';
+            if (document.querySelector('.language-content.active[data-lang="de"]')) lang = 'de';
+            // Show only the correct Impressum content
+            document.querySelectorAll('#impressumModal .impressum-lang').forEach(function(el) {
+                if (el.getAttribute('data-lang') === lang) {
+                    el.style.display = '';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+            // Update modal title for correct language
+            document.querySelectorAll('#impressumModal .language-content').forEach(function(el) {
+                if (el.getAttribute('data-lang') === lang) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            });
+        }
+
+        function closeImpressumModal() {
+            document.getElementById('impressumModal').classList.remove('active');
+        }
+
+        function openDatenschutzModal() {
+            document.getElementById('datenschutzModal').classList.add('active');
+            let lang = 'en';
+            if (document.querySelector('.language-content.active[data-lang="tr"]')) lang = 'tr';
+            if (document.querySelector('.language-content.active[data-lang="de"]')) lang = 'de';
+            // Show only the correct Datenschutz content
+            document.querySelectorAll('#datenschutzModal .impressum-lang').forEach(function(el) {
+                if (el.getAttribute('data-lang') === lang) {
+                    el.style.display = '';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+            // Update modal title for correct language
+            document.querySelectorAll('#datenschutzModal .language-content').forEach(function(el) {
+                if (el.getAttribute('data-lang') === lang) {
+                    el.classList.add('active');
+                } else {
+                    el.classList.remove('active');
+                }
+            });
+        }
+        function closeDatenschutzModal() {
+            document.getElementById('datenschutzModal').classList.remove('active');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("kBlSmkktKnxBDx0h5");
+        })();
+
         // Handle form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-            // Get form data
-            const name = document.getElementById('name').value;
-            const surname = document.getElementById('surname').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+                // Determine active language
+                let lang = 'en';
+                if (document.querySelector('.language-content.active[data-lang="tr"]')) lang = 'tr';
+                if (document.querySelector('.language-content.active[data-lang="de"]')) lang = 'de';
 
-            // Send email using EmailJS
-            emailjs.send(
-                "service_n9buz4i",
-                "template_gij5r49",
-                {
+                // Consent checkbox validation
+                let consentChecked = false;
+                if (lang === 'tr') consentChecked = document.getElementById('consent-tr').checked;
+                if (lang === 'en') consentChecked = document.getElementById('consent-en').checked;
+                if (lang === 'de') consentChecked = document.getElementById('consent-de').checked;
+
+                if (!consentChecked) {
+                    let msg = 'Please accept the privacy policy.';
+                    if (lang === 'tr') msg = 'Lütfen gizlilik politikasını kabul edin.';
+                    if (lang === 'de') msg = 'Bitte akzeptieren Sie die Datenschutzerklärung.';
+                    alert(msg);
+                    return;
+                }
+
+                // Get form data
+                const name = document.getElementById('name').value;
+                const surname = document.getElementById('surname').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+
+                // Show loading state
+                const submitBtn = this.querySelector('.submit-btn');
+                const originalBtnText = submitBtn.textContent;
+                submitBtn.textContent = (lang === 'tr') ? 'Gönderiliyor...' : (lang === 'de' ? 'Wird gesendet...' : 'Sending...');
+                submitBtn.disabled = true;
+
+                // Prepare template parameters
+                const templateParams = {
                     from_name: `${name} ${surname}`,
                     from_email: email,
                     message: message,
-                    to_email: "emre@akkas.eu"
-                }
-            )
-            .then(function() {
-                alert("Message sent successfully!");
-                document.getElementById('contactForm').reset();
-            })
-            .catch(function(error) {
-                alert("Failed to send message. Please try again later.");
-                console.error("Error:", error);
+                    to_email: "emre@akkas.eu",
+                    reply_to: email
+                };
+
+                // Send email using EmailJS
+                emailjs.send(
+                    "service_n9buz4i",
+                    "template_q1gas65",
+                    templateParams
+                )
+                .then(function(response) {
+                    console.log("SUCCESS!", response.status, response.text);
+                    let successMsg = 'Message sent successfully!';
+                    if (lang === 'tr') successMsg = 'Mesajınız başarıyla gönderildi!';
+                    if (lang === 'de') successMsg = 'Nachricht erfolgreich gesendet!';
+                    // Show success modal
+                    document.getElementById('successModal').classList.add('active');
+                    // Set correct language for modal
+                    document.querySelectorAll('#successModal .language-content').forEach(function(el) {
+                        if (el.getAttribute('data-lang') === lang) {
+                            el.classList.add('active');
+                        } else {
+                            el.classList.remove('active');
+                        }
+                    });
+                    document.getElementById('contactForm').reset();
+                })
+                .catch(function(error) {
+                    console.error("FAILED...", error);
+                    let failMsg = 'Failed to send message. Please check the console for details.';
+                    if (lang === 'tr') failMsg = 'Mesaj gönderilemedi. Lütfen tekrar deneyin.';
+                    if (lang === 'de') failMsg = 'Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut.';
+                    if (error.text) {
+                        alert(failMsg + "\n" + error.text);
+                    } else {
+                        alert(failMsg);
+                    }
+                })
+                .finally(function() {
+                    // Reset button state
+                    submitBtn.textContent = originalBtnText;
+                    submitBtn.disabled = false;
+                });
             });
+        }
+
+        // Language switching functionality
+        function setLanguage(lang) {
+            // Update active language button
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // Update all language content sections
+            document.querySelectorAll('.language-content').forEach(content => {
+                if (content.getAttribute('data-lang') === lang) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+
+            // Update calendar
+            updateCalendar(lang);
+
+            // Update Impressum and Datenschutz modals
+            document.querySelectorAll('#impressumModal .language-content, #datenschutzModal .language-content').forEach(content => {
+                if (content.getAttribute('data-lang') === lang) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+
+            // Update success modal
+            document.querySelectorAll('#successModal .language-content').forEach(content => {
+                if (content.getAttribute('data-lang') === lang) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+
+            // Store the selected language
+            localStorage.setItem('selectedLanguage', lang);
+        }
+
+        // Initialize language and theme on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial language
+            const savedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+            setLanguage(savedLanguage);
+
+            // Set initial active tab
+            const defaultTab = document.querySelector('.tab-btn');
+            if (defaultTab) {
+                defaultTab.classList.add('active');
+                const tabId = defaultTab.getAttribute('data-tab');
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    if (content.id === tabId) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+            }
+
+            // Set initial theme
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.getElementById('themeToggle').checked = savedTheme === 'dark';
         });
+    </script>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-modal-content">
+            <div class="success-check">&#10004;</div>
+            <div class="success-message">
+                <span class="language-content active" data-lang="en">Your message has been received successfully!</span>
+                <span class="language-content" data-lang="tr">Mesajınız başarıyla alınmıştır!</span>
+                <span class="language-content" data-lang="de">Ihre Nachricht wurde erfolgreich empfangen!</span>
+            </div>
+            <button class="success-close-btn" onclick="closeSuccessModal()">
+                <span class="language-content active" data-lang="en">Close</span>
+                <span class="language-content" data-lang="tr">Kapat</span>
+                <span class="language-content" data-lang="de">Schließen</span>
+            </button>
+        </div>
+    </div>
+
+    <button id="themeToggle" aria-label="Toggle dark mode" style="position: fixed; top: 20px; left: 20px; z-index: 2001; background: var(--container-bg); color: var(--primary); border: none; border-radius: 50%; width: 44px; height: 44px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); font-size: 1.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s, color 0.2s;">
+        <span id="themeIcon">🌙</span>
+    </button>
+
+    <script>
+    // Dark/Light mode toggle
+    function setTheme(mode) {
+        if (mode === 'dark') {
+            document.documentElement.classList.add('dark-mode');
+            localStorage.setItem('theme', 'dark');
+            document.getElementById('themeIcon').textContent = '☀️';
+        } else {
+            document.documentElement.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
+            document.getElementById('themeIcon').textContent = '🌙';
+        }
+    }
+    document.getElementById('themeToggle').onclick = function() {
+        if (document.documentElement.classList.contains('dark-mode')) {
+            setTheme('light');
+        } else {
+            setTheme('dark');
+        }
+    };
+    // On load, set theme from localStorage or system preference
+    (function() {
+        let theme = localStorage.getItem('theme');
+        if (!theme) {
+            theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        setTheme(theme);
+    })();
     </script>
 </body>
 </html>
